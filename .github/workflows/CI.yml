@@ -45,9 +45,8 @@ jobs:
         run: |
           bandit -r . -x tests
 
-      - name: Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.20.0
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: fs
           scan-ref: .
-          ignore-unfixed: true
