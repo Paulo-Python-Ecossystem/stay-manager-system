@@ -71,8 +71,9 @@ services:
       - DB_NAME=hotel_db
       - DB_USER=hotel_user
       - DB_PASS=hotel_password
-      - REDIS_URL=redis://redis:6379/0]
+      - REDIS_URL=redis://redis:6379/0
       - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
     depends_on:
       - db
       - redis
