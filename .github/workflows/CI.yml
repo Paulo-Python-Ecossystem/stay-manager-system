@@ -21,9 +21,15 @@ jobs:
           pip install -r requirements.txt
           pip install flake8 black isort
 
-      - name: Run linter
+      - name: Run flake8 with reviewdog
+        uses: reviewdog/action-flake8@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: warning
+
+      - name: Check formatting
         run: |
-          flake8 .
           black --check .
           isort --check-only .
 
