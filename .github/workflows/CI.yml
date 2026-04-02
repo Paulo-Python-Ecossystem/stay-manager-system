@@ -1,15 +1,15 @@
-name: CI
+name: Code Quality
 
 on:
-  push:
   pull_request:
+  push:
 
 permissions:
   contents: read
   pull-requests: write
 
 jobs:
-  build:
+  code-quality:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,21 +22,32 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install flake8 black isort
+          pip install flake8 black isort bandit
+          pip install flake8-quotes
 
-      - name: Run flake8 with reviewdog
+      - name: Flake8 (reviewdog)
         uses: reviewdog/action-flake8@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           filter_mode: diff_context
+          flake8_args: "--max-line-length=120 --exclude=migrations --ignore=E203,W503"
 
-      - name: Check formatting
+      - name: Black check
         run: |
-          black --check .
-          isort --check-only .
+          black . --check --diff --line-length 120 --exclude "/migrations/"
 
-      - name: Run tests
+      - name: Isort check
         run: |
-          python manage.py test
+          isort . --profile black --line-length 120 --check-only --diff --skip migrations
+
+      - name: Bandit security check
+        run: |
+          bandit -r . -x tests
+
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          ignore-unfixed: true

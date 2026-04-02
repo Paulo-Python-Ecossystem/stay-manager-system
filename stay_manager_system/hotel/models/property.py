@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Amenity(models.Model):
     class Meta:
         verbose_name = "Amenity"
@@ -12,6 +13,7 @@ class Amenity(models.Model):
     def __str__(self):
         return self.name
 
+
 class Hotel(models.Model):
     class Meta:
         verbose_name = "Hotel"
@@ -23,7 +25,7 @@ class Hotel(models.Model):
     phone = models.CharField(max_length=20, verbose_name="Phone Number", blank=True, null=True)
     description = models.TextField(blank=True, null=True, verbose_name="Description")
     amenities = models.ManyToManyField(Amenity, blank=True, related_name="hotels", verbose_name="Amenities")
-    
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

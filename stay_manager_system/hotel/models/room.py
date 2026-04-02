@@ -1,6 +1,7 @@
 from django.db import models
 from .property import Hotel, Amenity
 
+
 class RoomType(models.Model):
     class Meta:
         verbose_name = "Room Type"
@@ -17,6 +18,7 @@ class RoomType(models.Model):
 
     def __str__(self):
         return f"{self.name} - Capacity: {self.capacity}"
+
 
 class Room(models.Model):
     ROOM_STATUS_CHOICES = [

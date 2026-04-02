@@ -1,7 +1,7 @@
 from django.db import models
-from django.conf import settings
 from .room import Room
 from .guest import Guest
+
 
 class Booking(models.Model):
     STATUS_CHOICES = [
@@ -18,18 +18,18 @@ class Booking(models.Model):
 
     guest = models.ForeignKey(Guest, on_delete=models.CASCADE, related_name="bookings", verbose_name="Guest")
     room = models.ForeignKey(Room, on_delete=models.PROTECT, related_name="bookings", verbose_name="Room")
-    
+
     check_in_date = models.DateField(verbose_name="Check-in Date")
     check_out_date = models.DateField(verbose_name="Check-out Date")
-    
+
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING', verbose_name="Status")
     total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Total Price")
-    
+
     created_by = models.ForeignKey(
-        'hotel_auth.Account', 
-        on_delete=models.SET_NULL, 
-        blank=True, 
-        null=True, 
+        'hotel_auth.Account',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
         related_name="created_bookings",
         verbose_name="Created By Staff"
     )
@@ -39,6 +39,7 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"Booking {self.id} - {self.guest} - {self.room}"
+
 
 class Payment(models.Model):
     PAYMENT_METHOD_CHOICES = [
