@@ -24,22 +24,6 @@ class User(AbstractUser):
         default=False,
         verbose_name="Email Verified"
     )
-    # groups = models.ManyToManyField(
-    #     "auth.Group",
-    #     verbose_name="groups",
-    #     blank=True,
-    #     help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
-    #     related_name="hotel_auth_user_set",
-    #     related_query_name="user",
-    # )
-    # user_permissions = models.ManyToManyField(
-    #     "auth.Permission",
-    #     verbose_name="user permissions",
-    #     blank=True,
-    #     help_text="Specific permissions for this user.",
-    #     related_name="hotel_auth_user_permissions_set",
-    #     related_query_name="user",
-    # )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At"
@@ -48,7 +32,6 @@ class User(AbstractUser):
         auto_now=True,
         verbose_name="Updated At"
     )
-
 
     def __str__(self):
         return self.username
@@ -66,15 +49,15 @@ class Account(models.Model):
         # ]
 
     user = models.OneToOneField(
-        User, 
-        on_delete=models.CASCADE, 
-        related_name="account", 
+        User,
+        on_delete=models.CASCADE,
+        related_name="account",
         verbose_name="User",
     )
     role = models.ForeignKey(
         "hotel_auth.Role",
-        on_delete=models.CASCADE, 
-        related_name="account", 
+        on_delete=models.CASCADE,
+        related_name="account",
         verbose_name="Role",
     )
 

@@ -38,7 +38,7 @@ class HasRole(permissions.BasePermission):
         Dynamically create a permission class with a specific role requirement.
         """
         return type(
-            f'HasRole_{role_label}',
+            f"HasRole_{role_label}",
             (cls,),
-            {'required_role': role_label}
+            {"required_role": role_label},
         )

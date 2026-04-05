@@ -55,4 +55,3 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(Role)
 admin.site.register(Account)
-# admin.site.register(User)
