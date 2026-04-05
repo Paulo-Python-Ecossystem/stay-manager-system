@@ -1,0 +1,52 @@
+name: Code Quality
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          pip install flake8 black isort bandit
+          pip install flake8-quotes
+
+      - name: Flake8 (reviewdog)
+        uses: reviewdog/action-flake8@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          filter_mode: diff_context
+          flake8_args: "--max-line-length=120 --exclude=migrations --ignore=E203,W503 --inline-quotes=\"\""
+
+      - name: Black check
+        run: |
+          black . --check --diff --line-length 120 --exclude "/migrations/"
+
+      - name: Isort check
+        run: |
+          isort . --profile black --line-length 120 --check-only --diff --skip migrations
+
+      - name: Bandit security check
+        run: |
+          bandit -r . -x tests
+
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .

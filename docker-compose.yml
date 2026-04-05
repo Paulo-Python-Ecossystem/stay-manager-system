@@ -1,0 +1,83 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: hotel_db
+    restart: always
+    environment:
+      POSTGRES_USER: hotel_user
+      POSTGRES_PASSWORD: hotel_password
+      POSTGRES_DB: hotel_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: hotel_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    container_name: hotel_web
+    working_dir: /app/stay_manager_system
+    command: sh /app/docker-entrypoint.sh python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=hotel_db
+      - DB_USER=hotel_user
+      - DB_PASS=hotel_password
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+  celery_worker:
+    build: .
+    container_name: hotel_celery_worker
+    working_dir: /app/stay_manager_system
+    command: celery -A core worker -l info
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=db
+      - DB_NAME=hotel_db
+      - DB_USER=hotel_user
+      - DB_PASS=hotel_password
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+      - web
+
+  celery_beat:
+    build: .
+    container_name: hotel_celery_beat
+    working_dir: /app/stay_manager_system
+    command: >
+      sh -c "rm -f celerybeat.pid celerybeat-schedule.db && celery -A core beat -l info"
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=db
+      - DB_NAME=hotel_db
+      - DB_USER=hotel_user
+      - DB_PASS=hotel_password
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+      - web
+
+volumes:
+  postgres_data:
