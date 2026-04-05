@@ -5,8 +5,8 @@ from django.urls import reverse
 from hotel.models.booking import Booking
 from hotel.models.guest import Guest
 from hotel.models.property import Hotel
-from hotel_auth.models.user import User
 from hotel.models.room import Room, RoomType
+from hotel_auth.models.user import User
 from rest_framework import status
 from rest_framework.test import APITestCase
 

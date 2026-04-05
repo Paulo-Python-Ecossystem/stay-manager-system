@@ -1,13 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from hotel_auth.models.permission import Role
-from hotel_auth.models.user import Account, User
 
-# Register your models here.
-
-
-from django.contrib import admin
-from .models import User
+from .models.permission import Role
+from .models.user import Account, User
 
 
 @admin.register(User)

@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from .models.permission import Role
-from .models.user import User, Account
+from .models.user import Account, User
 
 
 class AuthenticationTests(APITestCase):

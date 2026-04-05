@@ -5,7 +5,6 @@ from .models.booking import Booking, Payment
 from .models.guest import Guest
 from .models.property import Amenity, Hotel
 from .models.room import Room, RoomType
-
 from .serializers import (
     AmenitySerializer,
     BookingSerializer,
