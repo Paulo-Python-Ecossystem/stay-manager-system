@@ -31,23 +31,29 @@ class UserAdmin(BaseUserAdmin):
     )
 
     fieldsets = BaseUserAdmin.fieldsets + (
-        ("Additional Info", {
-            "fields": (
-                "phone_number",
-                "email_verified",
-                "created_at",
-                "updated_at",
-            )
-        }),
+        (
+            "Additional Info",
+            {
+                "fields": (
+                    "phone_number",
+                    "email_verified",
+                    "created_at",
+                    "updated_at",
+                )
+            },
+        ),
     )
 
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
-        ("Additional Info", {
-            "fields": (
-                "phone_number",
-                "email_verified",
-            )
-        }),
+        (
+            "Additional Info",
+            {
+                "fields": (
+                    "phone_number",
+                    "email_verified",
+                )
+            },
+        ),
     )
 
     readonly_fields = ("created_at", "updated_at")

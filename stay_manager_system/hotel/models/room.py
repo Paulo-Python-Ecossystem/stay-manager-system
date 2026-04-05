@@ -22,10 +22,10 @@ class RoomType(models.Model):
 
 class Room(models.Model):
     ROOM_STATUS_CHOICES = [
-        ('AVAILABLE', 'Available'),
-        ('OCCUPIED', 'Occupied'),
-        ('CLEANING', 'Cleaning'),
-        ('MAINTENANCE', 'Needs Maintenance'),
+        ("AVAILABLE", "Available"),
+        ("OCCUPIED", "Occupied"),
+        ("CLEANING", "Cleaning"),
+        ("MAINTENANCE", "Needs Maintenance"),
     ]
 
     class Meta:
@@ -37,7 +37,7 @@ class Room(models.Model):
     room_type = models.ForeignKey(RoomType, on_delete=models.PROTECT, related_name="rooms", verbose_name="Room Type")
     room_number = models.CharField(max_length=20, verbose_name="Room Number")
     floor = models.CharField(max_length=20, blank=True, null=True, verbose_name="Floor")
-    status = models.CharField(max_length=20, choices=ROOM_STATUS_CHOICES, default='AVAILABLE', verbose_name="Status")
+    status = models.CharField(max_length=20, choices=ROOM_STATUS_CHOICES, default="AVAILABLE", verbose_name="Status")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

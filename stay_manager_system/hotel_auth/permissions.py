@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class IsStaffRole(permissions.BasePermission):
     """
     Custom permission to only allow access to users with 'is_staff_role' = True defined in their Role.
@@ -15,6 +16,7 @@ class IsStaffRole(permissions.BasePermission):
             return request.user.account.role.is_staff
         except Exception:
             return False
+
 
 class HasRole(permissions.BasePermission):
     """

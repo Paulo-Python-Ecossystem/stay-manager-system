@@ -13,7 +13,7 @@ class Guest(models.Model):
         blank=True,
         null=True,
         related_name="guest_profile",
-        verbose_name="User"
+        verbose_name="User",
     )
     first_name = models.CharField(max_length=100, verbose_name="First Name")
     last_name = models.CharField(max_length=100, verbose_name="Last Name")
@@ -21,17 +21,17 @@ class Guest(models.Model):
     phone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Phone Number")
 
     IDENTIFICATION_CHOICES = [
-        ('PASSPORT', 'Passport'),
-        ('NATIONAL_ID', 'National ID'),
-        ('DRIVER_LICENSE', 'Driver License'),
-        ('OTHER', 'Other'),
+        ("PASSPORT", "Passport"),
+        ("NATIONAL_ID", "National ID"),
+        ("DRIVER_LICENSE", "Driver License"),
+        ("OTHER", "Other"),
     ]
     identification_type = models.CharField(
         max_length=20,
         choices=IDENTIFICATION_CHOICES,
         blank=True,
         null=True,
-        verbose_name="ID Type"
+        verbose_name="ID Type",
     )
     identification_number = models.CharField(max_length=50, blank=True, null=True, verbose_name="ID Number")
 

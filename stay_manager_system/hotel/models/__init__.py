@@ -4,11 +4,11 @@ from .guest import Guest
 from .booking import Booking, Payment
 
 __all__ = [
-    'Hotel',
-    'Amenity',
-    'RoomType',
-    'Room',
-    'Guest',
-    'Booking',
-    'Payment',
+    "Hotel",
+    "Amenity",
+    "RoomType",
+    "Room",
+    "Guest",
+    "Booking",
+    "Payment",
 ]

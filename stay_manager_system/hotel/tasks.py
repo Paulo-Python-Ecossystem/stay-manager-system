@@ -1,6 +1,6 @@
 from celery import shared_task
 from django.core.mail import send_mail
-from django.conf import settings
+
 
 @shared_task
 def send_booking_confirmation_email(booking_id, guest_email, guest_name, room_number, hotel_name, check_in, check_out):
@@ -30,6 +30,7 @@ def send_booking_confirmation_email(booking_id, guest_email, guest_name, room_nu
     )
 
     return f"Confirmation email sent for Booking {booking_id} to {guest_email}"
+
 
 @shared_task
 def verify_room_statuses_from_bookings():

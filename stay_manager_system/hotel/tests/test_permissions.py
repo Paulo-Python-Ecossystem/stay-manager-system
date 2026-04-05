@@ -4,6 +4,7 @@ from rest_framework.test import APITestCase
 from hotel_auth.models.user import User, Account
 from hotel_auth.models.permission import Role
 
+
 class ApiPermissionsTests(APITestCase):
 
     def setUp(self):

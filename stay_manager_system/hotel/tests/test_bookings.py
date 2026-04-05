@@ -9,6 +9,7 @@ from hotel.models.guest import Guest
 from hotel.models.booking import Booking
 from hotel_auth.models.user import User
 
+
 class BookingTests(APITestCase):
 
     def setUp(self):
@@ -57,5 +58,5 @@ class BookingTests(APITestCase):
             room_number=self.room.room_number,
             hotel_name=self.hotel.name,
             check_in=str(booking.check_in_date),
-            check_out=str(booking.check_out_date)
+            check_out=str(booking.check_out_date),
         )

@@ -16,6 +16,7 @@ from .serializers import (
     PaymentSerializer,
 )
 
+
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
@@ -24,11 +25,13 @@ class HotelViewSet(viewsets.ModelViewSet):
     search_fields = ["name", "address", "description"]
     ordering_fields = ["name", "created_at"]
 
+
 class AmenityViewSet(viewsets.ModelViewSet):
     queryset = Amenity.objects.all()
     serializer_class = AmenitySerializer
     permission_classes = [IsStaffRole]
     search_fields = ["name"]
+
 
 class RoomTypeViewSet(viewsets.ModelViewSet):
     queryset = RoomType.objects.all()
@@ -38,6 +41,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     search_fields = ["name", "description"]
     ordering_fields = ["base_price", "capacity"]
 
+
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
@@ -46,6 +50,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     search_fields = ["room_number", "floor"]
     ordering_fields = ["room_number", "hotel"]
 
+
 class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
@@ -53,6 +58,7 @@ class GuestViewSet(viewsets.ModelViewSet):
     filterset_fields = ["user", "identification_type"]
     search_fields = ["first_name", "last_name", "email", "identification_number"]
     ordering_fields = ["first_name", "last_name", "created_at"]
+
 
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
@@ -87,6 +93,7 @@ class BookingViewSet(viewsets.ModelViewSet):
                 check_in=str(booking.check_in_date),
                 check_out=str(booking.check_out_date),
             )
+
 
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.all()

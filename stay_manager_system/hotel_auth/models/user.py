@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+
 class User(AbstractUser):
     class Meta:
         verbose_name = "User"
@@ -18,19 +19,19 @@ class User(AbstractUser):
         max_length=20,
         blank=True,
         null=True,
-        verbose_name="Phone Number"
+        verbose_name="Phone Number",
     )
     email_verified = models.BooleanField(
         default=False,
-        verbose_name="Email Verified"
+        verbose_name="Email Verified",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name="Created At"
+        verbose_name="Created At",
     )
     updated_at = models.DateTimeField(
         auto_now=True,
-        verbose_name="Updated At"
+        verbose_name="Updated At",
     )
 
     def __str__(self):
