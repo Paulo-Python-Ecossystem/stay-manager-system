@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from .models.property import Hotel, Amenity
-from .models.room import RoomType, Room
-from .models.guest import Guest
 from .models.booking import Booking, Payment
+from .models.guest import Guest
+from .models.property import Amenity, Hotel
+from .models.room import Room, RoomType
 
 
 class AmenitySerializer(serializers.ModelSerializer):

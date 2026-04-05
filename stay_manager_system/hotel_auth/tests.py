@@ -1,10 +1,10 @@
 import jwt
-
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from .models.user import User, Account
+
 from .models.permission import Role
+from .models.user import User, Account
 
 
 class AuthenticationTests(APITestCase):

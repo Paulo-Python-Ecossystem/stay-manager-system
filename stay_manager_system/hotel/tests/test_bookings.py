@@ -1,13 +1,14 @@
+from datetime import date, timedelta
+from unittest.mock import patch
+
 from django.urls import reverse
+from hotel.models.booking import Booking
+from hotel.models.guest import Guest
+from hotel.models.property import Hotel
+from hotel_auth.models.user import User
+from hotel.models.room import Room, RoomType
 from rest_framework import status
 from rest_framework.test import APITestCase
-from unittest.mock import patch
-from datetime import date, timedelta
-from hotel.models.property import Hotel
-from hotel.models.room import RoomType, Room
-from hotel.models.guest import Guest
-from hotel.models.booking import Booking
-from hotel_auth.models.user import User
 
 
 class BookingTests(APITestCase):

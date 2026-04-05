@@ -1,5 +1,6 @@
 from django.db import models
-from .property import Hotel, Amenity
+
+from .property import Amenity, Hotel
 
 
 class RoomType(models.Model):

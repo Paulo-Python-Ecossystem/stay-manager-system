@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from hotel_auth.models.permission import Role
 from hotel_auth.models.user import Account, User
 
@@ -6,7 +7,6 @@ from hotel_auth.models.user import Account, User
 
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User
 
 

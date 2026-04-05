@@ -1,19 +1,19 @@
-from rest_framework import viewsets, permissions
-from hotel_auth.permissions import IsStaffRole, HasRole
+from hotel_auth.permissions import HasRole, IsStaffRole
+from rest_framework import permissions, viewsets
 
-from .models.property import Hotel, Amenity
-from .models.room import RoomType, Room
-from .models.guest import Guest
 from .models.booking import Booking, Payment
+from .models.guest import Guest
+from .models.property import Amenity, Hotel
+from .models.room import Room, RoomType
 
 from .serializers import (
-    HotelSerializer,
     AmenitySerializer,
-    RoomTypeSerializer,
-    RoomSerializer,
-    GuestSerializer,
     BookingSerializer,
+    GuestSerializer,
+    HotelSerializer,
     PaymentSerializer,
+    RoomSerializer,
+    RoomTypeSerializer,
 )
 
 

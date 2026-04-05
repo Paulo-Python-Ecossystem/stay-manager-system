@@ -1,8 +1,9 @@
 from django.urls import reverse
+from hotel_auth.models.permission import Role
+from hotel_auth.models.user import User, Account
 from rest_framework import status
 from rest_framework.test import APITestCase
-from hotel_auth.models.user import User, Account
-from hotel_auth.models.permission import Role
+
 
 
 class ApiPermissionsTests(APITestCase):
