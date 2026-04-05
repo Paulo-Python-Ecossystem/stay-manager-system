@@ -23,7 +23,7 @@ services:
     build: .
     container_name: hotel_web
     working_dir: /app/stay_manager_system
-    command: python manage.py runserver 0.0.0.0:8000
+    command: sh /app/docker-entrypoint.sh python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
@@ -63,7 +63,7 @@ services:
     container_name: hotel_celery_beat
     working_dir: /app/stay_manager_system
     command: >
-          sh -c "rm -f celerybeat.pid celerybeat-schedule.db && celery -A core beat -l info"
+      sh -c "rm -f celerybeat.pid celerybeat-schedule.db && celery -A core beat -l info"
     volumes:
       - .:/app
     environment:
