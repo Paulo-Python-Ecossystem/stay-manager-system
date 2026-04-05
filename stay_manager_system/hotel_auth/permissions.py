@@ -7,6 +7,7 @@ class IsStaffRole(permissions.BasePermission):
     Since we embedded this in the token, we could check the token directly if we wanted,
     but DRF simplejwt automatically puts the verified user in request.user.
     """
+
     def has_permission(self, request, view):
         if not request.user or not request.user.is_authenticated:
             return False
@@ -23,6 +24,7 @@ class HasRole(permissions.BasePermission):
     Allows access only to users with a specific role label.
     Usage: permission_classes = [HasRole.with_role('Receptionist')]
     """
+
     required_role = None
 
     def has_permission(self, request, view):

@@ -31,7 +31,7 @@ class Room(models.Model):
     class Meta:
         verbose_name = "Room"
         verbose_name_plural = "Rooms"
-        unique_together = ('hotel', 'room_number')
+        unique_together = ("hotel", "room_number")
 
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="rooms", verbose_name="Hotel")
     room_type = models.ForeignKey(RoomType, on_delete=models.PROTECT, related_name="rooms", verbose_name="Room Type")

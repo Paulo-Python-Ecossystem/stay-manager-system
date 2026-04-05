@@ -69,13 +69,14 @@ class BookingViewSet(viewsets.ModelViewSet):
     ordering_fields = ["check_in_date", "check_out_date", "created_at"]
 
     def perform_create(self, serializer):
-        if hasattr(self.request.user, 'account'):
+        if hasattr(self.request.user, "account"):
             booking = serializer.save(created_by=self.request.user.account)
         else:
             booking = serializer.save()
 
         # Trigger confirmation email asynchronously
         from .tasks import send_booking_confirmation_email
+
         guest_email = booking.guest.email
         guest_name = str(booking.guest)
 
