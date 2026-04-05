@@ -39,10 +39,7 @@ class AuthenticationTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        decoded_payload = jwt.decode(
-            response.data["access"],
-            options={"verify_signature": False}
-        )
+        decoded_payload = jwt.decode(response.data["access"], options={"verify_signature": False})
 
         self.assertIn("role", decoded_payload)
         self.assertEqual(decoded_payload["role"], "Test Staff")
